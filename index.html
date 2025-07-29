@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SinghWare | Siti Web che Fanno Vendere</title>
+    <style>
+        /* Reset + Font Google */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;700&display=swap');
+        body { 
+            font-family: 'Open Sans', sans-serif; 
+            line-height: 1.6; 
+            color: #333; 
+            background: #f8f9fa;
+        }
+        
+        /* Colori esplosivi */
+        :root { 
+            --arancio: #FF6B35; 
+            --arancio-scuro: #E94F37; 
+            --nero: #1E1E24; 
+            --bianco: #FFFFFF;
+            --grigio-chiaro: #F5F5F5;
+        }
+        
+        /* Header da urlo */
+        header { 
+            background: linear-gradient(135deg, var(--arancio), var(--arancio-scuro));
+            color: var(--bianco); 
+            padding: 80px 20px; 
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::after {
+            content: "";
+            background: url('https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center/cover;
+            opacity: 0.15;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 1;
+        }
+        
+        .hero-content { position: relative; z-index: 2; }
+        
+        h1 { 
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 3.5rem; 
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .sottotitolo {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--nero);
+            color: var(--bianco);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            border: 3px solid var(--nero);
+        }
+        
+        .cta-button:hover {
+            background: transparent;
+            color: var(--nero);
+        }
+        
+        /* Sezioni killer */
+        section { 
+            padding: 100px 20px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+        
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 70px;
+            color: var(--arancio-scuro);
+            position: relative;
+        }
+        
+        h2::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: var(--arancio);
+            margin: 20px auto;
+        }
+        
+        /* Servizi che fanno girare la testa */
+        .servizi {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .servizio {
+            background: var(--bianco);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        
+        .servizio:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .servizio-icon {
+            font-size: 3.5rem;
+            color: var(--arancio);
+            margin-bottom: 25px;
+        }
+        
+        .servizio h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--nero);
+        }
+        
+        /* Recensioni esplosive */
+        .recensioni-section {
+            background: var(--grigio-chiaro);
+        }
+        
+        .recensioni {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .recensione {
+            background: var(--bianco);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .recensione-testo {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .recensione-testo::before {
+            content: """;
+            font-size: 4rem;
+            color: var(--arancio);
+            opacity: 0.2;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+        }
+        
+        .recensione-autore {
+            font-weight: bold;
+            color: var(--arancio-scuro);
+        }
+        
+        .recensione-azienda {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Form contatti */
+        #contatti {
+            background: var(--nero);
+            color: var(--bianco);
+        }
+        
+        #contatti h2 {
+            color: var(--bianco);
+        }
+        
+        .contatti-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .info-contatti {
+            margin-bottom: 30px;
+        }
+        
+        .info-contatti p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-contatti i {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            color: var(--arancio);
+        }
+        
+        form {
+            display: grid;
+            gap: 20px;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: none;
+            font-family: inherit;
+            background: rgba(255,255,255,0.9);
+        }
+        
+        textarea {
+            min-height: 150px;
+        }
+        
+        button[type="submit"] {
+            background: var(--arancio);
+            color: var(--bianco);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button[type="submit"]:hover {
+            background: var(--arancio-scuro);
+        }
+        
+        /* Footer */
+        footer {
+            background: #111;
+            color: var(--bianco);
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .social-links {
+            margin: 30px 0;
+        }
+        
+        .social-links a {
+            color: var(--bianco);
+            margin: 0 15px;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--arancio);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .sottotitolo { font-size: 1.2rem; }
+            h2 { font-size: 2rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="https://img.icons8.com/color/48/000000/domain.png">
+</head>
+<body>
+    <!-- Hero Section -->
+    <header>
+        <div class="hero-content">
+            <h1>SinghWare</h1>
+            <p class="sottotitolo">Siti web che non si limitano a esistere, ma <strong>vendono</strong>, <strong>conquistano</strong> e <strong>fidelizzano</strong>. Il tuo business merita di esplodere.</p>
+            <a href="#contatti" class="cta-button">VOGLIO UN SITO CHE VENDE</a>
+        </div>
+    </header>
+
+    <!-- Servizi -->
+    <section id="servizi">
+        <h2>Come Trasformiamo il Tuo Business</h2>
+        <div class="servizi">
+            <div class="servizio">
+                <div class="servizio-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Siti ad Alta Conversione</h3>
+                <p>Non semplici vetrine, ma <strong>macchine da soldi</strong> studiate per convertire i visitatori in clienti. Ogni pixel è ottimizzato per vendere.</p>
+            </div>
+            <div class="servizio">
+                <div class="servizio-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Design Responsive</h3>
+                <p>Perfetto su <strong>smartphone, tablet e desktop</strong>. Perderai clienti se il tuo sito non è mobile-friendly nel 2024.</p>
+            </div>
+            <div class="servizio">
+                <div class="servizio-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>SEO Killer</h3>
+                <p>Ottimizzazione <strong>su misura per Google</strong>. Apparirai in prima pagina per le parole chiave che contano.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recensioni -->
+    <section class="recensioni-section">
+        <h2>Cosa Dicono i Nostri Clienti</h2>
+        <div class="recensioni">
+            <div class="recensione">
+                <div class="recensione-testo">
+                    "Dopo il sito SinghWare, le nostre vendite online sono <strong>aumentate del 300%</strong> in 3 mesi. Non credevo fosse possibile!"
+                </div>
+                <div class="recensione-autore">Marco Bianchi</div>
+                <div class="recensione-azienda">CEO, Luxury Watches</div>
+            </div>
+            <div class="recensione">
+                <div class="recensione-testo">
+                    "Finalmente un'agenzia che capisce davvero le <strong>esigenze del business</strong>. Il nostro sito ora converte come un pazzo!"
+                </div>
+                <div class="recensione-autore">Laura Rossi</div>
+                <div class="recensione-azienda">Fashion Boutique</div>
+            </div>
+            <div class="recensione">
+                <div class="recensione-testo">
+                    "Ho provato 3 web designer prima di SinghWare. <strong>Nessuno si avvicina</strong> alla loro qualità e attenzione ai dettagli."
+                </div>
+                <div class="recensione-autore">Andrea Verdi</div>
+                <div class="recensione-azienda">Personal Trainer</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contatti -->
+    <section id="contatti">
+        <h2>Pronto a Far Esplodere il Tuo Business?</h2>
+        <div class="contatti-container">
+            <div>
+                <div class="info-contatti">
+                    <p><i class="fas fa-map-marker-alt"></i> Via del Successo, 123 - Milano</p>
+                    <p><i class="fas fa-phone"></i> <a href="tel:+390123456789" style="color: var(--bianco);">+39 012 345 6789</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@singhware.com" style="color: var(--bianco);">info@singhware.com</a></p>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <form>
+                <input type="text" placeholder="Nome e Cognome" required>
+                <input type="email" placeholder="Email" required>
+                <input type="tel" placeholder="Telefono">
+                <textarea placeholder="Raccontaci del tuo progetto e di come possiamo aiutarti a far esplodere il tuo business..." required></textarea>
+                <button type="submit">INVIA LA MIA RICHIESTA</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>© 2024 SinghWare - Siti Web che Fanno Vendere | P.IVA 0123456789</p>
+        <p style="margin-top: 15px; font-size: 0.9rem;">Progettato con ❤️ per far crescere il tuo business</p>
+    </footer>
+</body>
+</html>
