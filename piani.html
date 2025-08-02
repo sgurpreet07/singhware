@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piani Tariffari | SinghWare</title>
+    <style>
+        /* Stili base (ereditati dal sito principale) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Neue Machina', sans-serif;
+            background-color: #0A0A0A;
+            color: #FFFFFF;
+            line-height: 1.7;
+        }
+        
+        /* Stili specifici per la pagina piani */
+        .pricing-hero {
+            padding: 180px 5% 100px;
+            text-align: center;
+            background: radial-gradient(circle at 70% 30%, rgba(255, 77, 0, 0.1) 0%, rgba(0, 0, 0, 0) 50%);
+        }
+        
+        .pricing-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #FFFFFF, #00F0FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .pricing-hero p {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            opacity: 0.9;
+            font-size: 1.2rem;
+        }
+        
+        /* Sezione Piani */
+        .pricing-section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .pricing-card {
+            background: #1A1A1A;
+            border-radius: 15px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .pricing-card.pro {
+            border-top: 5px solid #00F0FF;
+        }
+        
+        .pricing-card.premium {
+            border-top: 5px solid #FF00E4;
+        }
+        
+        .pricing-card.business {
+            border-top: 5px solid #FF4D00;
+        }
+        
+        .pricing-header {
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-price {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-price span {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+        
+        .pricing-features {
+            margin: 2rem 0;
+        }
+        
+        .pricing-features li {
+            list-style: none;
+            padding: 0.7rem 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .pricing-features li::before {
+            content: "✓";
+            color: #00F0FF;
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+        
+        .pricing-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+        
+        .pro-btn {
+            background: #00F0FF;
+            color: #0A0A0A;
+        }
+        
+        .premium-btn {
+            background: #FF00E4;
+            color: #FFFFFF;
+        }
+        
+        .business-btn {
+            background: #FF4D00;
+            color: #FFFFFF;
+        }
+        
+        .pricing-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .pricing-recommended {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: #FF4D00;
+            color: white;
+            padding: 0.3rem 2rem;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            width: 120px;
+            text-align: center;
+        }
+        
+        /* Sezione FAQ */
+        .faq-section {
+            padding: 5rem 5%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .faq-question {
+            padding: 1.5rem 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .faq-answer {
+            padding-bottom: 1.5rem;
+            display: none;
+        }
+        
+        .faq-answer.active {
+            display: block;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-hero {
+                padding: 150px 5% 80px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<!-- Header (UGUALE all'index.html) -->
+<header id="header">
+    <a href="index.html" class="logo">SINGHWARE</a>
+    <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#services">Servizi</a></li>
+            <li><a href="index.html#portfolio">Portfolio</a></li>
+            <li><a href="piani.html" class="active">Piani</a></li>
+            <li><a href="index.html#contact">Contatti</a></li>
+        </ul>
+    </nav>
+</header>
+
+<style>
+/* Aggiungi questo stile per uniformare la navbar */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: rgba(10, 10, 10, 0.9);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+header.scrolled {
+    padding: 1rem 5%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #FF4D00, #FF00E4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+}
+
+.logo::after {
+    content: '®';
+    position: absolute;
+    top: -5px;
+    right: -15px;
+    font-size: 0.8rem;
+    color: #00F0FF;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+nav a {
+    position: relative;
+    padding: 0.5rem 0;
+    overflow: hidden;
+    color: #FFFFFF;
+}
+
+nav a.active {
+    color: #FF4D00;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #FF4D00, #FF00E4);
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after, 
+nav a.active::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #FFFFFF;
+}
+
+/* Stile mobile (se necessario) */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+    
+    nav {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        height: 100vh;
+        background: #050505;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+    
+    nav.active {
+        left: 0;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        margin-top: 5rem;
+    }
+}
+</style>
+
+<script>
+// Aggiungi questo script per il funzionamento identico
+document.addEventListener('DOMContentLoaded', function() {
+    // Scroll effect
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('header');
+        if(window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    menuToggle.addEventListener('click', function() {
+        nav.classList.toggle('active');
+    });
+
+    // Chiudi menu al click sui link
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('active');
+        });
+    });
+});
+</script>
+
+    <!-- Hero Section -->
+    <section class="pricing-hero">
+        <h1>Piani Tariffari</h1>
+        <p>Scegli la soluzione perfetta per le esigenze del tuo business. Tutti i nostri piani includono supporto dedicato e soluzioni su misura.</p>
+    </section>
+
+    <!-- Sezione Piani -->
+    <section class="pricing-section">
+        <div class="pricing-grid">
+            <!-- Piano PRO -->
+            <div class="pricing-card pro">
+                <div class="pricing-header">
+                    <h3 class="pricing-title">PRO</h3>
+                    <div class="pricing-price">199 € <span>+ 10€/mese</span></div>
+                </div>
+                <ul class="pricing-features">
+                    <li>Sito vetrina fino a 2 pagine</li>
+                    <li>Design responsive</li>
+                    <li>1 modifica/mese</li>
+                    <li>Hosting incluso</li>
+                    <li>1 anno incluso </li>
+                </ul>
+                <a href="index.html#contact" class="pricing-btn pro-btn">Scegli PRO</a>
+            </div>
+
+            <!-- Piano PREMIUM -->
+            <div class="pricing-card premium">
+                <div class="pricing-header">
+                    <h3 class="pricing-title">PREMIUM</h3>
+                    <div class="pricing-price">299 € <span>+ 15€/mese</span></div>
+                </div>
+                <ul class="pricing-features">
+                    <li>Fino a 4 pagine</li>
+                    <li>Modulo contatto/email</li>
+                    <li>2 modifiche/mese</li>
+                    <li>Supporto via WhatsApp</li>
+                    <li>1 anno incluso </li>
+                </ul>
+                <a href="index.html#contact" class="pricing-btn premium-btn">Scegli PREMIUM</a>
+            </div>
+
+            <!-- Piano BUSINESS AI -->
+            <div class="pricing-card business">
+                <div class="pricing-recommended">in arrivo</div>
+                <div class="pricing-header">
+                    <h3 class="pricing-title">BUSINESS AI</h3>
+                    <div class="pricing-price"> 799 € <span>+ 299€/mese</span></div>
+                </div>
+                <ul class="pricing-features">
+                    <li>Tutto il pacchetto Premium</li>
+                    <li>Agente AI (n8n + ElevenLabs)</li>
+                    <li>Risposte automatiche alle chiamate</li>
+                    <li>Presa appuntamenti + CRM</li>
+                    <li>Script personalizzati</li>
+                    <li>Assistenza continua</li>
+                </ul>
+                <a href="index.html#contact" class="pricing-btn business-btn">Scegli BUSINESS</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sezione FAQ -->
+    <section class="faq-section">
+        <h2 style="text-align: center; margin-bottom: 3rem;">Domande Frequenti</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Posso cambiare piano in seguito?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Assolutamente sì! Puoi aggiornare il tuo piano in qualsiasi momento contattando il nostro team. L'upgrade sarà effettivo dal ciclo di fatturazione successivo.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>C'è un impegno contrattuale minimo?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>No, tutti i nostri piani sono senza vincoli contrattuali. Puoi cancellarti in qualsiasi momento con un preavviso di 30 giorni.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Come funziona il supporto tecnico?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Offriamo supporto via email per tutti i piani. I piani Premium e Business includono supporto prioritario via WhatsApp con tempi di risposta garantiti.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Posso personalizzare ulteriormente un piano?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Sì, offriamo soluzioni completamente personalizzate per aziende con esigenze specifiche. Contattaci per una consulenza personalizzata.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (simile al sito principale) -->
+    <footer style="padding: 5rem 5% 2rem; text-align: center; background: #050505; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="footer-logo">SINGHWARE</div>
+        <div class="footer-links" style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
+            <a href="index.html" class="footer-link">Home</a>
+            <a href="index.html#services" class="footer-link">Servizi</a>
+            <a href="index.html#portfolio" class="footer-link">Portfolio</a>
+            <a href="piani.html" class="footer-link">Piani</a>
+            <a href="index.html#contact" class="footer-link">Contatti</a>
+        </div>
+        <div class="copyright" style="opacity: 0.7; font-size: 0.9rem;">
+            &copy; 2024 SinghWare. Tutti i diritti riservati.
+        </div>
+    </footer>
+
+    <!-- Script per FAQ -->
+    <script>
+        // FAQ toggle
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                answer.classList.toggle('active');
+                
+                const icon = question.querySelector('i');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+
+        // Mobile menu toggle (come nel sito principale)
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        menuToggle.addEventListener('click', function() {
+            nav.classList.toggle('active');
+        });
+
+        // Chiudi menu mobile al click su link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
